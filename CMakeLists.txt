@@ -27,7 +27,12 @@ find_package(GTest)
 if(GTEST_FOUND)
 	target_include_directories(${PROJ_TEST} PRIVATE ${GTEST_INCLUDE_DIRS})
 	target_link_libraries(${PROJ_TEST} ${GTEST_BOTH_LIBRARIES})
-endif()
+	if(UNIX)
+	target_include_directories(${PROJ_TEST} PRIVATE ${GTEST_INCLUDE_DIRS})
+	target_link_libraries(${PROJ_TEST} pthread)
+	endif(UNIX)
+endif(GTEST_FOUND)
+
 
 
 enable_testing()
