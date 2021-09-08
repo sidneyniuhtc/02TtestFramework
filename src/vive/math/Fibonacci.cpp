@@ -1,6 +1,5 @@
 #include "vive/math/Fibonacci.hpp"
 
-
 int vive::math::Fibonacci(int n)
 {
 	int n_2 = 1;

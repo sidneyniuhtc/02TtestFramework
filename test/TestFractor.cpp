@@ -1,5 +1,9 @@
 #include <gtest/gtest.h>
 
+#include "vive/math/Fractor.hpp"
+
+using namespace vive::math;
+
 TEST(TestFractor, NormalInputs) {
 	using std::vector;
 	using std::cout;
