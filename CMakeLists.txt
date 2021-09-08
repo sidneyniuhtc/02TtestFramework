@@ -8,9 +8,7 @@ project(${PROJ_NAME})
 
 # include all files
 include_directories("${CMAKE_SOURCE_DIR}/include")
-message("include_directories(${PROJ_INCLUDE_DIRS})")
 set(PROJ_INCLUDE_DIRS ${PROJ_INCLUDE_DIRS} "${PROJECT_SOURCE_DIR}/include")
-file(GLOB_RECURSE PROJ_HEADERS "${CMAKE_SOURCE_DIR}/include/*.hpp")
 
 # create our library
 file(GLOB_RECURSE PROJ_LIB_SOURCES "${CMAKE_SOURCE_DIR}/src/*.cpp")
@@ -22,21 +20,20 @@ target_link_libraries(${PROJ_TEST} ${PROJ_LIB})
 target_include_directories(${PROJ_TEST} PUBLIC ${PROJ_INCLUDE_DIRS})
 
 
-#find googleTest
+# find googleTest
 find_package(GTest)
 if(GTEST_FOUND)
 	target_include_directories(${PROJ_TEST} PRIVATE ${GTEST_INCLUDE_DIRS})
 	target_link_libraries(${PROJ_TEST} ${GTEST_BOTH_LIBRARIES})
-	if(UNIX)
-	target_include_directories(${PROJ_TEST} PRIVATE ${GTEST_INCLUDE_DIRS})
-	target_link_libraries(${PROJ_TEST} pthread)
-	endif(UNIX)
 endif(GTEST_FOUND)
 
+# thread for google test
+find_package(Threads)
+target_link_libraries(${PROJ_TEST} Threads::Threads)
 
+
+# add test unit
 
 enable_testing()
 include(GoogleTest)
 gtest_discover_tests(${PROJ_TEST})
-
-
