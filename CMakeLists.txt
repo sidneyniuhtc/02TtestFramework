@@ -25,13 +25,12 @@ find_package(GTest)
 if(GTEST_FOUND)
 	target_include_directories(${PROJ_TEST} PRIVATE ${GTEST_INCLUDE_DIRS})
 	target_link_libraries(${PROJ_TEST} ${GTEST_BOTH_LIBRARIES})
-	if(UNIX)
-		target_link_libraries(${PROJ_TEST} pthread)
-	endif(UNIX)
 endif(GTEST_FOUND)
 
-# add test unit
+find_package(Threads)
+target_link_libraries(${PROJ_TEST} Threads::Threads)
 
+# add test unit
 enable_testing()
 include(GoogleTest)
 gtest_discover_tests(${PROJ_TEST})
