@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
 
-set(PROJ_NAME "02Algorithm")
+set(PROJ_NAME "02TestFramework")
 set(PROJ_TEST "Test${PROJ_NAME}")
 set(PROJ_LIB "lib${PROJ_NAME}")
 
